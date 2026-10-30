@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../lib/db';
+import { authService } from '../../lib/auth';
+import { hasPermission } from '../../lib/rbac';
 import { Quotation, QuotationStatus, Enquiry, Customer } from '../../types/database';
 import { formatINR, formatDate, generateReference, calculateQuoteContribution } from '../../lib/utils';
 import { generateCustomerQuotationPDF } from '../../lib/pdfGenerator';
@@ -35,6 +37,9 @@ export const QuotationManagement: React.FC<QuotationManagementProps> = ({
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
+
+  const currentUser = authService.getCurrentUser();
+  const canViewMargins = currentUser ? hasPermission(currentUser.role, 'view_internal_margins') : true;
 
   // Modal states
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -280,27 +285,37 @@ export const QuotationManagement: React.FC<QuotationManagementProps> = ({
 
                     {/* INTERNAL CONTRIBUTION (Hidden from customer) */}
                     <td className="py-3.5 px-4 bg-orange-50/30">
-                      <div className="font-bold text-emerald-700">
-                        {formatINR(quote.estimated_contribution)}
-                      </div>
-                      <div className="text-[10px] text-slate-400">
-                        Cost: {formatINR(quote.transporter_cost)}
-                      </div>
+                      {canViewMargins ? (
+                        <>
+                          <div className="font-bold text-emerald-700">
+                            {formatINR(quote.estimated_contribution)}
+                          </div>
+                          <div className="text-[10px] text-slate-400">
+                            Cost: {formatINR(quote.transporter_cost)}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="text-slate-400 text-[11px] italic font-mono">[Restricted]</div>
+                      )}
                     </td>
 
                     {/* INTERNAL MARGIN % */}
                     <td className="py-3.5 px-4 bg-orange-50/30">
-                      <span
-                        className={`inline-block px-2 py-0.5 rounded font-mono font-bold text-[11px] ${
-                          quote.margin_percentage >= 10
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : quote.margin_percentage >= 5
-                            ? 'bg-amber-100 text-amber-800'
-                            : 'bg-red-100 text-red-800'
-                        }`}
-                      >
-                        {quote.margin_percentage.toFixed(1)}%
-                      </span>
+                      {canViewMargins ? (
+                        <span
+                          className={`inline-block px-2 py-0.5 rounded font-mono font-bold text-[11px] ${
+                            quote.margin_percentage >= 10
+                              ? 'bg-emerald-100 text-emerald-800'
+                              : quote.margin_percentage >= 5
+                              ? 'bg-amber-100 text-amber-800'
+                              : 'bg-red-100 text-red-800'
+                          }`}
+                        >
+                          {quote.margin_percentage.toFixed(1)}%
+                        </span>
+                      ) : (
+                        <span className="text-slate-400 text-[11px] italic font-mono">[Restricted]</span>
+                      )}
                     </td>
 
                     <td className="py-3.5 px-4 text-slate-600 font-medium">
@@ -715,23 +730,29 @@ export const QuotationManagement: React.FC<QuotationManagementProps> = ({
               </div>
 
               {/* Internal Commercials Note */}
-              <div className="p-3 bg-orange-50 border border-brand-orange/30 rounded text-slate-700 space-y-1">
-                <span className="font-bold text-brand-orange block text-[11px] uppercase">
-                  Internal Profitability Metrics
-                </span>
-                <div className="flex justify-between">
-                  <span>Transporter Purchase Rate:</span>
-                  <span className="font-semibold">{formatINR(previewQuote.transporter_cost)}</span>
+              {canViewMargins ? (
+                <div className="p-3 bg-orange-50 border border-brand-orange/30 rounded text-slate-700 space-y-1">
+                  <span className="font-bold text-brand-orange block text-[11px] uppercase">
+                    Internal Profitability Metrics
+                  </span>
+                  <div className="flex justify-between">
+                    <span>Transporter Purchase Rate:</span>
+                    <span className="font-semibold">{formatINR(previewQuote.transporter_cost)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Other Direct Charges:</span>
+                    <span className="font-semibold">{formatINR(previewQuote.other_direct_costs)}</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-emerald-800 pt-1 border-t border-orange-200">
+                    <span>Estimated Contribution:</span>
+                    <span>{formatINR(previewQuote.estimated_contribution)} ({previewQuote.margin_percentage.toFixed(1)}%)</span>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span>Other Direct Charges:</span>
-                  <span className="font-semibold">{formatINR(previewQuote.other_direct_costs)}</span>
+              ) : (
+                <div className="p-3 bg-slate-100 border border-slate-200 rounded text-slate-500 text-xs italic">
+                  Internal transporter payout and margin contribution metrics are restricted to Management.
                 </div>
-                <div className="flex justify-between font-bold text-emerald-800 pt-1 border-t border-orange-200">
-                  <span>Estimated Contribution:</span>
-                  <span>{formatINR(previewQuote.estimated_contribution)} ({previewQuote.margin_percentage.toFixed(1)}%)</span>
-                </div>
-              </div>
+              )}
 
               <div className="pt-2 text-slate-500 text-[11px]">
                 Valid Until: <strong>{formatDate(previewQuote.validity_date)}</strong> &bull; Terms: {previewQuote.payment_terms}

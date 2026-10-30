@@ -1,6 +1,6 @@
 // Database entity types matching PostgreSQL tables
-
-export type UserRole = 'admin' | 'operations' | 'viewer';
+import type { UserRole } from '../lib/rbac';
+export type { UserRole };
 
 export interface Profile {
   id: string;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { db } from '../../lib/db';
 import { rateLimiter } from '../../lib/rateLimiter';
 import { generateReference } from '../../lib/utils';
+import { sanitizeText } from '../../lib/sanitize';
 import { Enquiry } from '../../types/database';
 import { useTranslation } from '../../i18n/LanguageContext';
 import {
@@ -135,18 +136,18 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({ compact = false }) => {
 
       const enquiryData = {
         reference_no,
-        customer_name: formData.customer_name.trim(),
-        company_name: formData.company_name.trim() || undefined,
+        customer_name: sanitizeText(formData.customer_name),
+        company_name: sanitizeText(formData.company_name) || undefined,
         mobile: formData.mobile.trim(),
         email: formData.email.trim() || undefined,
-        pickup_city: formData.pickup_city.trim(),
-        destination_city: formData.destination_city.trim(),
-        material_description: formData.material_description.trim(),
-        approximate_weight: formData.approximate_weight.trim(),
+        pickup_city: sanitizeText(formData.pickup_city),
+        destination_city: sanitizeText(formData.destination_city),
+        material_description: sanitizeText(formData.material_description),
+        approximate_weight: sanitizeText(formData.approximate_weight),
         pickup_date: formData.pickup_date,
         vehicle_preference: formData.vehicle_preference || undefined,
-        loading_requirements: formData.loading_requirements.trim() || undefined,
-        additional_instructions: formData.additional_instructions.trim() || undefined,
+        loading_requirements: sanitizeText(formData.loading_requirements) || undefined,
+        additional_instructions: sanitizeText(formData.additional_instructions) || undefined,
         status: 'New' as const,
         internal_notes: 'Submitted via Public Freight Quote Portal.',
       };

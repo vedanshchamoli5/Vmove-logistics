@@ -8,6 +8,7 @@ interface LanguageContextType {
   t: (key: string, fallback?: string) => string;
   languages: LanguageMeta[];
   currentMeta: LanguageMeta;
+  isRTL: boolean;
 }
 
 const STORAGE_KEY = 'vmove_preferred_language';
@@ -21,9 +22,32 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       if (saved && SUPPORTED_LANGUAGES.some((l) => l.code === saved)) {
         return saved;
       }
+      // Check browser language preference if available
+      const browserLang = (typeof navigator !== 'undefined' ? navigator.language : '').toLowerCase();
+      const match = SUPPORTED_LANGUAGES.find((l) => browserLang.startsWith(l.code));
+      if (match) return match.code;
     } catch {}
     return 'en';
   });
+
+  const currentMeta = SUPPORTED_LANGUAGES.find((l) => l.code === language) || SUPPORTED_LANGUAGES[0];
+  const isRTL = Boolean(currentMeta.isRTL);
+
+  // Synchronize document attributes whenever language changes
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = currentMeta.bcp47 || language;
+      document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+      document.documentElement.setAttribute('data-language', language);
+      document.documentElement.setAttribute('data-script', currentMeta.script);
+
+      if (isRTL) {
+        document.body.classList.add('rtl-active');
+      } else {
+        document.body.classList.remove('rtl-active');
+      }
+    }
+  }, [language, currentMeta, isRTL]);
 
   const setLanguage = (lang: LanguageCode) => {
     setLanguageState(lang);
@@ -32,15 +56,13 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     } catch {}
   };
 
-  const currentMeta = SUPPORTED_LANGUAGES.find((l) => l.code === language) || SUPPORTED_LANGUAGES[0];
-
   const t = (key: string, fallback?: string): string => {
     const langDict = translations[language];
     if (langDict && langDict[key]) {
       return langDict[key];
     }
     // Fallback to English
-    if (translations.en[key]) {
+    if (translations.en && translations.en[key]) {
       return translations.en[key];
     }
     return fallback || key;
@@ -54,6 +76,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         t,
         languages: SUPPORTED_LANGUAGES,
         currentMeta,
+        isRTL,
       }}
     >
       {children}
