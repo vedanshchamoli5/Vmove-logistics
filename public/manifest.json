@@ -1,0 +1,23 @@
+{
+  "name": "Vmove Logistics",
+  "short_name": "Vmove",
+  "description": "Moving Business Forward. Reliable B2B Road Transportation & Freight Management across India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#10243A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "48x48 72x72 96x96 128x128 256x256",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/assets/branding/logo.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["business", "logistics", "transportation"]
+}

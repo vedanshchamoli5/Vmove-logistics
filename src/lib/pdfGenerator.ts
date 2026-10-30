@@ -1,4 +1,3 @@
-import jsPDF from 'jspdf';
 import { Quotation } from '../types/database';
 import { formatINR, formatDate } from './utils';
 
@@ -11,7 +10,9 @@ import { formatINR, formatDate } from './utils';
  * - Estimated contribution amounts
  * - Confidential operational notes
  */
-export function generateCustomerQuotationPDF(quote: Quotation): void {
+export async function generateCustomerQuotationPDF(quote: Quotation): Promise<void> {
+  const { default: jsPDF } = await import('jspdf');
+
   const doc = new jsPDF({
     orientation: 'portrait',
     unit: 'mm',

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { rateLimiter } from '../lib/rateLimiter';
 
 describe('Rate Limiter & Anti-Spam Security', () => {
@@ -10,9 +10,16 @@ describe('Rate Limiter & Anti-Spam Security', () => {
     expect(rateLimiter.validateIndianMobile('6123456789')).toBe(true);
   });
 
-  it('rejects invalid mobile numbers and landlines', () => {
+  it('validates Indian corporate landline numbers with standard STD codes', () => {
+    expect(rateLimiter.validateIndianMobile('022-26123456')).toBe(true); // Mumbai 022 + 8 digits
+    expect(rateLimiter.validateIndianMobile('011-23456789')).toBe(true); // Delhi 011 + 8 digits
+    expect(rateLimiter.validateIndianMobile('080-41234567')).toBe(true); // Bengaluru 080 + 8 digits
+    expect(rateLimiter.validateIndianMobile('0124-4567890')).toBe(true); // Gurugram 0124 + 7 digits
+  });
+
+  it('rejects invalid numbers, short strings, and non-digits', () => {
     expect(rateLimiter.validateIndianMobile('1234567890')).toBe(false);
-    expect(rateLimiter.validateIndianMobile('022-26123456')).toBe(false);
+    expect(rateLimiter.validateIndianMobile('0000000000')).toBe(false);
     expect(rateLimiter.validateIndianMobile('98765')).toBe(false);
     expect(rateLimiter.validateIndianMobile('abcdefghij')).toBe(false);
   });

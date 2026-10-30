@@ -6,16 +6,25 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
+ * Strict two-decimal currency rounding to prevent IEEE-754 floating point drift
+ */
+export function roundCurrency(amount: number): number {
+  if (isNaN(amount) || !isFinite(amount)) return 0;
+  return Math.round((amount + Number.EPSILON) * 100) / 100;
+}
+
+/**
  * Format amounts in Indian Rupee format (INR ₹)
  */
 export function formatINR(amount: number): string {
   if (isNaN(amount)) return "₹0.00";
+  const safeAmount = roundCurrency(amount);
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
     maximumFractionDigits: 2,
     minimumFractionDigits: 2,
-  }).format(amount);
+  }).format(safeAmount);
 }
 
 /**
@@ -67,7 +76,7 @@ export function generateReference(prefix: 'VM-ENQ' | 'VM-QUO' | 'VM-BKG' | 'VM-I
 }
 
 /**
- * Calculate commercial contribution & margin safely
+ * Calculate commercial contribution & margin safely with strict decimal rounding
  */
 export function calculateQuoteContribution(
   customerFreight: number,
@@ -86,9 +95,9 @@ export function calculateQuoteContribution(
   const totalCustomerAmount = freight + gstAmount;
 
   return {
-    estimatedContribution: Math.round(estimatedContribution * 100) / 100,
-    marginPercentage: Math.round(marginPercentage * 100) / 100,
-    gstAmount: Math.round(gstAmount * 100) / 100,
-    totalCustomerAmount: Math.round(totalCustomerAmount * 100) / 100,
+    estimatedContribution: roundCurrency(estimatedContribution),
+    marginPercentage: roundCurrency(marginPercentage),
+    gstAmount: roundCurrency(gstAmount),
+    totalCustomerAmount: roundCurrency(totalCustomerAmount),
   };
 }
