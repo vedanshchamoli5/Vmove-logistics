@@ -1,0 +1,212 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bannerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070D18" />
+      <stop offset="40%" stop-color="#10243A" />
+      <stop offset="85%" stop-color="#0D1B2A" />
+      <stop offset="100%" stop-color="#050B14" />
+    </linearGradient>
+
+    <!-- Orange Gradient -->
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FB923C" />
+      <stop offset="50%" stop-color="#F97316" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+
+    <!-- Cyan/Blue Tech Accent -->
+    <linearGradient id="blueGlowGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Highway Perspective Grid Mask -->
+    <linearGradient id="fadeMask" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.1" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="glowOrange" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="softCardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+
+    <style>
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(1.03); }
+      }
+      @keyframes speedDash {
+        0% { stroke-dashoffset: 200; }
+        100% { stroke-dashoffset: -200; }
+      }
+      @keyframes highwaySweep {
+        0% { stroke-dashoffset: 400; }
+        100% { stroke-dashoffset: 0; }
+      }
+      .pulse-beacon {
+        animation: pulseGlow 4s ease-in-out infinite;
+      }
+      .highway-lane {
+        stroke-dasharray: 20 20;
+        animation: speedDash 2.5s linear infinite;
+      }
+      .banner-card:hover {
+        filter: drop-shadow(0 12px 28px rgba(249, 115, 22, 0.25));
+        transition: all 0.3s ease;
+      }
+    </style>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="360" rx="18" fill="url(#bannerBg)" stroke="#1E293B" stroke-width="2" />
+
+  <!-- Ambient Glow Blobs -->
+  <circle cx="1050" cy="80" r="220" fill="#F97316" opacity="0.12" filter="blur(60px)" class="pulse-beacon" />
+  <circle cx="150" cy="300" r="180" fill="#38BDF8" opacity="0.08" filter="blur(50px)" />
+
+  <!-- Perspective Highway Graphic (Logistics Corridors Motif) -->
+  <g opacity="0.25">
+    <!-- Horizon Line -->
+    <line x1="0" y1="210" x2="1200" y2="210" stroke="#334155" stroke-width="1" />
+    <!-- Converging Highway Lines -->
+    <line x1="600" y1="210" x2="100" y2="360" stroke="#475569" stroke-width="1.5" />
+    <line x1="600" y1="210" x2="350" y2="360" stroke="#475569" stroke-width="1" />
+    <line x1="600" y1="210" x2="520" y2="360" stroke="url(#orangeGrad)" stroke-width="2" class="highway-lane" />
+    <line x1="600" y1="210" x2="680" y2="360" stroke="url(#orangeGrad)" stroke-width="2" class="highway-lane" />
+    <line x1="600" y1="210" x2="850" y2="360" stroke="#475569" stroke-width="1" />
+    <line x1="600" y1="210" x2="1100" y2="360" stroke="#475569" stroke-width="1.5" />
+  </g>
+
+  <!-- Left Content Column -->
+  <g transform="translate(60, 48)">
+    <!-- Top Pill Badge -->
+    <g>
+      <rect width="320" height="28" rx="14" fill="#1E293B" stroke="url(#orangeGrad)" stroke-width="1.2" />
+      <circle cx="14" cy="14" r="4.5" fill="#10B981" />
+      <text x="26" y="18" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#F8FAFC" letter-spacing="0.8">
+        ENTERPRISE B2B FREIGHT PLATFORM
+      </text>
+    </g>
+
+    <!-- Main Title -->
+    <g transform="translate(0, 52)">
+      <text x="0" y="44" font-family="'Inter', 'Manrope', sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" letter-spacing="-1">
+        VMOVE
+      </text>
+      <text x="195" y="44" font-family="'Inter', 'Manrope', sans-serif" font-weight="900" font-size="52" fill="url(#orangeGrad)" letter-spacing="-1">
+        LOGISTICS
+      </text>
+    </g>
+
+    <!-- Tagline & Core Positioning -->
+    <text x="2" y="132" font-family="'Inter', 'Manrope', sans-serif" font-weight="800" font-size="20" fill="#E2E8F0" letter-spacing="0.2">
+      Your Cargo. Our Commitment.
+    </text>
+
+    <text x="2" y="160" font-family="'Inter', sans-serif" font-weight="400" font-size="13" fill="#94A3B8" letter-spacing="0.1">
+      Next-Generation Verified Carrier Network &bull; Pan-India FTL &bull; Phishing-Resistant Architecture
+    </text>
+
+    <!-- Key Metric Pills Bar -->
+    <g transform="translate(0, 185)">
+      <!-- Pill 1 -->
+      <g>
+        <rect width="145" height="34" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1" />
+        <text x="14" y="21" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#F97316">23 Languages</text>
+        <text x="96" y="21" font-family="'Inter', sans-serif" font-weight="500" font-size="10" fill="#94A3B8">+ RTL</text>
+      </g>
+      <!-- Pill 2 -->
+      <g transform="translate(155, 0)">
+        <rect width="145" height="34" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1" />
+        <text x="14" y="21" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#10B981">RFC 6238 TOTP</text>
+        <text x="110" y="21" font-family="'Inter', sans-serif" font-weight="500" font-size="10" fill="#94A3B8">MFA</text>
+      </g>
+      <!-- Pill 3 -->
+      <g transform="translate(310, 0)">
+        <rect width="145" height="34" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1" />
+        <text x="14" y="21" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#38BDF8">5-Tier RBAC</text>
+        <text x="92" y="21" font-family="'Inter', sans-serif" font-weight="500" font-size="10" fill="#94A3B8">Matrix</text>
+      </g>
+      <!-- Pill 4 -->
+      <g transform="translate(465, 0)">
+        <rect width="145" height="34" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1" />
+        <text x="14" y="21" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#A855F7">35/35 Tests</text>
+        <text x="95" y="21" font-family="'Inter', sans-serif" font-weight="500" font-size="10" fill="#94A3B8">Vitest</text>
+      </g>
+    </g>
+
+    <!-- Direct Operations Hotlines -->
+    <g transform="translate(0, 235)">
+      <text x="2" y="16" font-family="'Inter', sans-serif" font-weight="600" font-size="11" fill="#64748B" letter-spacing="0.5">
+        DIRECT OPERATIONS: <tspan fill="#F8FAFC" font-weight="700">+91 7906308640</tspan> &bull; WHATSAPP DISPATCH &bull; GURUGRAM / DELHI NCR
+      </text>
+    </g>
+  </g>
+
+  <!-- Right Floating Showcase Widget Card -->
+  <g class="banner-card" transform="translate(780, 45)" filter="url(#softCardShadow)">
+    <!-- Container Card -->
+    <rect width="360" height="268" rx="16" fill="#0F172A" stroke="#334155" stroke-width="1.5" />
+    <rect width="360" height="268" rx="16" fill="url(#blueGlowGrad)" opacity="0.05" />
+
+    <!-- Card Header -->
+    <g transform="translate(20, 20)">
+      <rect width="32" height="32" rx="8" fill="#10243A" stroke="url(#orangeGrad)" stroke-width="1" />
+      <path d="M9 11 L16 23 L23 11 H19.5 L16 17 L12.5 11 H9Z" fill="#FFFFFF" />
+      <path d="M16 17 L19 12 H23 L16 24 L13 19 H15.5 L16 17Z" fill="#F97316" />
+
+      <text x="42" y="16" font-family="'Inter', sans-serif" font-weight="800" font-size="13" fill="#FFFFFF">
+        VMOVE LIVE DISPATCH
+      </text>
+      <text x="42" y="28" font-family="'Inter', sans-serif" font-weight="600" font-size="10" fill="#10B981">
+        ● ALL OPERATIONAL LANES ACTIVE
+      </text>
+    </g>
+
+    <!-- Corridors Status Feed -->
+    <g transform="translate(20, 72)">
+      <!-- Lane 1 -->
+      <g>
+        <rect width="320" height="42" rx="8" fill="#1E293B" stroke="#334155" stroke-width="0.8" />
+        <circle cx="16" cy="21" r="3.5" fill="#F97316" />
+        <text x="28" y="19" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#F1F5F9">DELHI NCR ⇄ MUMBAI / JNPT</text>
+        <text x="28" y="32" font-family="'Inter', sans-serif" font-weight="500" font-size="9" fill="#94A3B8">32ft MXL &bull; Verified Fleet &bull; Transit 48h</text>
+        <text x="250" y="24" font-family="'Inter', sans-serif" font-weight="700" font-size="10" fill="#10B981">PLACED</text>
+      </g>
+
+      <!-- Lane 2 -->
+      <g transform="translate(0, 48)">
+        <rect width="320" height="42" rx="8" fill="#1E293B" stroke="#334155" stroke-width="0.8" />
+        <circle cx="16" cy="21" r="3.5" fill="#38BDF8" />
+        <text x="28" y="19" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#F1F5F9">PUNE MIDC ⇄ BENGALURU</text>
+        <text x="28" y="32" font-family="'Inter', sans-serif" font-weight="500" font-size="9" fill="#94A3B8">32ft SXL &bull; Auto Components &bull; Transit 36h</text>
+        <text x="250" y="24" font-family="'Inter', sans-serif" font-weight="700" font-size="10" fill="#38BDF8">TRANSIT</text>
+      </g>
+
+      <!-- Lane 3 -->
+      <g transform="translate(0, 96)">
+        <rect width="320" height="42" rx="8" fill="#1E293B" stroke="#334155" stroke-width="0.8" />
+        <circle cx="16" cy="21" r="3.5" fill="#A855F7" />
+        <text x="28" y="19" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#F1F5F9">AHMEDABAD ⇄ CHENNAI</text>
+        <text x="28" y="32" font-family="'Inter', sans-serif" font-weight="500" font-size="9" fill="#94A3B8">40ft High Bed &bull; Heavy Engineering</text>
+        <text x="245" y="24" font-family="'Inter', sans-serif" font-weight="700" font-size="10" fill="#F59E0B">SCHEDULED</text>
+      </g>
+    </g>
+
+    <!-- Bottom Security Certification Footer -->
+    <g transform="translate(20, 228)">
+      <line x1="0" y1="0" x2="320" y2="0" stroke="#334155" stroke-width="1" />
+      <text x="0" y="22" font-family="'Inter', sans-serif" font-weight="600" font-size="10" fill="#64748B">
+        Security Architecture: <tspan fill="#F8FAFC">RFC 6238 TOTP + 5-Tier RBAC</tspan>
+      </text>
+    </g>
+  </g>
+</svg>

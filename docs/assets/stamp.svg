@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Metallic Gold Gradients -->
+    <linearGradient id="goldGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="30%" stop-color="#F59E0B" />
+      <stop offset="70%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+
+    <linearGradient id="goldGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB" />
+      <stop offset="45%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#92400E" />
+    </linearGradient>
+
+    <linearGradient id="stampNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#10243A" />
+      <stop offset="100%" stop-color="#0A111E" />
+    </linearGradient>
+
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="stampShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+
+    <!-- Curved Text Paths -->
+    <!-- Top Arc (Curved upwards) -->
+    <path id="topTextArc" d="M 45,180 A 135,135 0 0,1 315,180" fill="none" />
+    <!-- Bottom Arc (Curved downwards) -->
+    <path id="bottomTextArc" d="M 315,180 A 135,135 0 0,1 45,180" fill="none" />
+
+    <style>
+      @keyframes slowRotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes goldPulse {
+        0%, 100% { filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.4)); }
+        50% { filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.8)); }
+      }
+      .stamp-outer {
+        transform-origin: center;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .stamp-outer:hover {
+        transform: scale(1.06) rotate(-2deg);
+      }
+      .bead-ring {
+        animation: slowRotate 60s linear infinite;
+        transform-origin: center;
+      }
+    </style>
+  </defs>
+
+  <!-- Main Stamp Container -->
+  <g class="stamp-outer" filter="url(#stampShadow)">
+    <!-- Outer Scalloped / Serrated Border -->
+    <circle cx="180" cy="180" r="172" fill="#0A0F1D" stroke="url(#goldGrad1)" stroke-width="3.5" />
+
+    <!-- Secondary Concentric Ring with Gold Beading -->
+    <circle cx="180" cy="180" r="162" fill="none" stroke="url(#goldGrad2)" stroke-width="1.5" stroke-dasharray="4 4" class="bead-ring" />
+
+    <!-- Outer Navy Ring -->
+    <circle cx="180" cy="180" r="150" fill="url(#stampNavy)" stroke="url(#goldGrad1)" stroke-width="2" />
+
+    <!-- Circular Track for Top Typography -->
+    <text font-family="'Inter', 'Manrope', -apple-system, sans-serif" font-weight="900" font-size="11.5" fill="url(#goldGrad1)" letter-spacing="3.2">
+      <textPath href="#topTextArc" startOffset="50%" text-anchor="middle">
+        ★ CURATED &amp; ENGINEERED BY VEDANSH CHAMOLI ★
+      </textPath>
+    </text>
+
+    <!-- Circular Track for Bottom Typography -->
+    <text font-family="'Inter', 'Manrope', -apple-system, sans-serif" font-weight="800" font-size="10.5" fill="url(#goldGrad1)" letter-spacing="2.8">
+      <textPath href="#bottomTextArc" startOffset="50%" text-anchor="middle">
+        ◆ 2026 VERIFIED PRODUCTION ARCHITECTURE ◆
+      </textPath>
+    </text>
+
+    <!-- Inner Golden Border -->
+    <circle cx="180" cy="180" r="118" fill="none" stroke="url(#goldGrad2)" stroke-width="2.5" />
+    <circle cx="180" cy="180" r="113" fill="none" stroke="url(#goldGrad1)" stroke-width="1" stroke-dasharray="3 3" />
+
+    <!-- Center Medallion Inner Core -->
+    <circle cx="180" cy="180" r="108" fill="url(#stampNavy)" />
+
+    <!-- 5 Five-Star Rating Arc Above Shield -->
+    <g transform="translate(180, 102)" fill="url(#goldGrad1)" text-anchor="middle" font-size="13">
+      <text x="-40" y="0">★</text>
+      <text x="-20" y="-3">★</text>
+      <text x="0" y="-5" font-size="16">★</text>
+      <text x="20" y="-3">★</text>
+      <text x="40" y="0">★</text>
+    </g>
+
+    <!-- Central Security Shield Motif -->
+    <g transform="translate(145, 122)">
+      <!-- Shield Base -->
+      <path d="M35 5 L65 18 V46 C65 68 49 84 35 90 C21 84 5 68 5 46 V18 L35 5Z" fill="#10243A" stroke="url(#goldGrad1)" stroke-width="2.5" />
+
+      <!-- Interlocking Monogram VC (Vedansh Chamoli) & VM (Vmove) -->
+      <!-- Monogram V -->
+      <path d="M22 28 L35 62 L48 28 H41 L35 44 L29 28 H22Z" fill="#FFFFFF" />
+      <!-- Monogram C / M Cross Wing -->
+      <path d="M35 44 L43 28 H49 L36 64 L34 64 L25 42 L28 35 L35 44Z" fill="url(#goldGrad1)" />
+      <!-- Star Accent -->
+      <circle cx="49" cy="27" r="3" fill="#F59E0B" />
+    </g>
+
+    <!-- Middle Certification Ribbon Banner -->
+    <g transform="translate(48, 222)">
+      <!-- Banner Background -->
+      <rect x="0" y="0" width="264" height="26" rx="6" fill="url(#goldGrad1)" stroke="#FFFBEB" stroke-width="1" filter="url(#goldGlow)" />
+      <!-- Banner Text -->
+      <text x="132" y="17" font-family="'Inter', sans-serif" font-weight="900" font-size="9.5" fill="#0A0F1D" letter-spacing="1.2" text-anchor="middle">
+        OFFICIAL SEAL OF ENGINEERING EXCELLENCE
+      </text>
+    </g>
+
+    <!-- Subtext Under Banner -->
+    <text x="180" y="266" font-family="'Inter', sans-serif" font-weight="700" font-size="9" fill="#E2E8F0" letter-spacing="1.5" text-anchor="middle">
+      FULL-STACK • CYBERSECURITY • I18N
+    </text>
+    <text x="180" y="278" font-family="'Inter', sans-serif" font-weight="600" font-size="8" fill="#F59E0B" letter-spacing="1" text-anchor="middle">
+      22 CONSTITUTIONAL LANGUAGES + EN
+    </text>
+  </g>
+</svg>

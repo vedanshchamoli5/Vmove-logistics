@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 48" width="100%" height="48" fill="none">
+  <defs>
+    <linearGradient id="tickerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <linearGradient id="fadeEdgeLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0B1320" stop-opacity="1" />
+      <stop offset="100%" stop-color="#0B1320" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="fadeEdgeRight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0B1320" stop-opacity="0" />
+      <stop offset="100%" stop-color="#0B1320" stop-opacity="1" />
+    </linearGradient>
+
+    <style>
+      @keyframes tickerMarquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-900px); }
+      }
+      .ticker-strip {
+        animation: tickerMarquee 18s linear infinite;
+      }
+      .ticker-strip:hover {
+        animation-play-state: paused;
+      }
+    </style>
+  </defs>
+
+  <!-- Background Bar -->
+  <rect width="1200" height="48" rx="8" fill="url(#tickerGrad)" stroke="#334155" stroke-width="1.2" />
+
+  <!-- Fixed Left Label -->
+  <g transform="translate(14, 12)">
+    <rect width="128" height="24" rx="5" fill="#F97316" />
+    <text x="12" y="16" font-family="'Inter', sans-serif" font-weight="800" font-size="10" fill="#FFFFFF" letter-spacing="0.5">
+      LIVE CORRIDORS
+    </text>
+  </g>
+
+  <!-- Scrolling Viewport -->
+  <g transform="translate(155, 0)">
+    <svg width="1030" height="48" viewBox="0 0 1030 48">
+      <g class="ticker-strip">
+        <!-- Item Group 1 -->
+        <g transform="translate(0, 30)" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#E2E8F0">
+          <text x="0" y="0">
+            <tspan fill="#F97316">●</tspan> DELHI NCR ⇄ MUMBAI / JNPT <tspan fill="#64748B">[48h Direct FTL]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#38BDF8">●</tspan> PUNE MIDC ⇄ BENGALURU <tspan fill="#64748B">[36h Dedicated MXL]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#10B981">●</tspan> AHMEDABAD ⇄ CHENNAI <tspan fill="#64748B">[60h High Bed Trailer]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#A855F7">●</tspan> HYDERABAD ⇄ KOLKATA <tspan fill="#64748B">[42h Containerized Cargo]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#F59E0B">●</tspan> LUDHIANA ⇄ JAIPUR <tspan fill="#64748B">[20h Regional Feed]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#EC4899">●</tspan> SURAT ⇄ INDORE <tspan fill="#64748B">[18h Express Transit]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+          </text>
+        </g>
+
+        <!-- Repeated Item Group for Infinite Seamless Loop -->
+        <g transform="translate(900, 30)" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#E2E8F0">
+          <text x="0" y="0">
+            <tspan fill="#F97316">●</tspan> DELHI NCR ⇄ MUMBAI / JNPT <tspan fill="#64748B">[48h Direct FTL]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#38BDF8">●</tspan> PUNE MIDC ⇄ BENGALURU <tspan fill="#64748B">[36h Dedicated MXL]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#10B981">●</tspan> AHMEDABAD ⇄ CHENNAI <tspan fill="#64748B">[60h High Bed Trailer]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#A855F7">●</tspan> HYDERABAD ⇄ KOLKATA <tspan fill="#64748B">[42h Containerized Cargo]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#F59E0B">●</tspan> LUDHIANA ⇄ JAIPUR <tspan fill="#64748B">[20h Regional Feed]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+            <tspan fill="#EC4899">●</tspan> SURAT ⇄ INDORE <tspan fill="#64748B">[18h Express Transit]</tspan>
+            &nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;
+          </text>
+        </g>
+      </g>
+    </svg>
+  </g>
+
+  <!-- Left/Right Gradient Faders -->
+  <rect x="150" y="0" width="30" height="48" fill="url(#fadeEdgeLeft)" pointer-events="none" />
+  <rect x="1170" y="0" width="30" height="48" fill="url(#fadeEdgeRight)" pointer-events="none" />
+</svg>

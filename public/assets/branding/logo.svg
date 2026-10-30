@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="brandNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#10243A" />
+      <stop offset="100%" stop-color="#1E3A5F" />
+    </linearGradient>
+
+    <linearGradient id="brandOrangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FB923C" />
+      <stop offset="50%" stop-color="#F97316" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+
+    <linearGradient id="speedGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0" />
+      <stop offset="100%" stop-color="#F97316" stop-opacity="0.8" />
+    </linearGradient>
+
+    <filter id="shadowFilter" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.25" />
+    </filter>
+
+    <style>
+      @keyframes floatPulse {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-2px); }
+      }
+      @keyframes streakGlow {
+        0% { stroke-dashoffset: 60; opacity: 0.3; }
+        50% { stroke-dashoffset: 0; opacity: 1; }
+        100% { stroke-dashoffset: -60; opacity: 0.3; }
+      }
+      .mark-container {
+        animation: floatPulse 4s ease-in-out infinite;
+        transition: transform 0.3s ease;
+      }
+      .mark-container:hover {
+        transform: scale(1.05);
+      }
+      .speed-line {
+        stroke-dasharray: 30 15;
+        animation: streakGlow 3s linear infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- Logo Mark Icon -->
+  <g class="mark-container" transform="translate(10, 10)">
+    <!-- Shield Container -->
+    <rect width="100" height="100" rx="22" fill="url(#brandNavyGrad)" stroke="url(#brandOrangeGrad)" stroke-width="2.5" filter="url(#shadowFilter)" />
+
+    <!-- Kinetic Speed Ribbons -->
+    <path d="M12 78 L38 78" stroke="url(#brandOrangeGrad)" stroke-width="2.5" stroke-linecap="round" class="speed-line" />
+    <path d="M8 86 L30 86" stroke="url(#brandOrangeGrad)" stroke-width="2" stroke-linecap="round" class="speed-line" opacity="0.6" />
+
+    <!-- Interlocking Stylized 'V' and 'M' Freight Wings -->
+    <!-- Primary V (White) -->
+    <path d="M26 30 L50 72 L74 30 H61 L50 52 L39 30 H26Z" fill="#FFFFFF" />
+
+    <!-- Forward Momentum M Chevron (Orange) -->
+    <path d="M50 52 L62 30 H75 L52 74 L48 74 L37 54 L44 43 L50 52Z" fill="url(#brandOrangeGrad)" />
+
+    <!-- Leading Beacon Point -->
+    <circle cx="75" cy="28" r="4.5" fill="#F97316" />
+    <circle cx="75" cy="28" r="7" stroke="#F97316" stroke-width="1.5" opacity="0.4" />
+  </g>
+
+  <!-- Brand Typography -->
+  <g transform="translate(130, 20)">
+    <!-- Primary Wordmark -->
+    <text x="0" y="46" font-family="'Inter', 'Manrope', -apple-system, sans-serif" font-weight="900" font-size="44" letter-spacing="-0.5" fill="#10243A">
+      VMOVE
+    </text>
+    <text x="165" y="46" font-family="'Inter', 'Manrope', -apple-system, sans-serif" font-weight="900" font-size="44" letter-spacing="-0.5" fill="url(#brandOrangeGrad)">
+      LOGISTICS
+    </text>
+
+    <!-- Sub-tagline / Mission -->
+    <text x="2" y="72" font-family="'Inter', 'Manrope', -apple-system, sans-serif" font-weight="700" font-size="12" letter-spacing="3.5" fill="#64748B">
+      MOVING BUSINESS FORWARD.
+    </text>
+
+    <!-- Corridor Badging Indicator -->
+    <g transform="translate(0, 84)">
+      <rect width="270" height="18" rx="5" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+      <circle cx="10" cy="9" r="3.5" fill="#10B981" />
+      <text x="20" y="12.5" font-family="'Inter', sans-serif" font-weight="700" font-size="9" fill="#0F172A" letter-spacing="0.5">
+        PAN-INDIA COMMERCIAL ROAD FREIGHT
+      </text>
+    </g>
+  </g>
+</svg>
